@@ -1,7 +1,7 @@
-let CAPACITY_WH = 750;   // deine Akkukapazität in Wh
+let CAPACITY_WH = 625;   // your battery capacity in Wh
 let START_SOC = 0.20;
 let TARGET_SOC = 0.80;
-let EFFICIENCY = 0.85;   // ggf. kalibrieren
+let EFFICIENCY = 0.85;   // calibrate if needed
 let TARGET_WH = (CAPACITY_WH * (TARGET_SOC - START_SOC)) / EFFICIENCY;
 
 let startEnergy = null;
@@ -13,6 +13,6 @@ Timer.set(30000, true, function () {
   let delivered = st.aenergy.total - startEnergy;
   if (delivered >= TARGET_WH) {
     Shelly.call("Switch.Set", { id: 0, on: false });
-    print("Ziel erreicht: " + delivered.toFixed(1) + " Wh geladen");
+    print("Target reached: " + delivered.toFixed(1) + " Wh charged");
   }
 });
